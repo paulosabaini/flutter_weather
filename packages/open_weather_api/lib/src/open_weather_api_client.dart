@@ -20,7 +20,7 @@ class OpenWeatherApiClient {
   OpenWeatherApiClient({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = 'https://api.openweathermap.org';
+  static const _baseUrl = 'api.openweathermap.org';
 
   final http.Client _httpClient;
 
