@@ -31,7 +31,7 @@ class OpenWeatherApiClient {
       '/geo/1.0/direct',
       {
         'q': query,
-        'limit': 1,
+        'limit': '1',
         'appid': openWeatherApiKey,
       },
     );

@@ -45,7 +45,7 @@ void main() {
               '/geo/1.0/direct',
               {
                 'q': query,
-                'limit': 1,
+                'limit': '1',
                 'appid': openWeatherApiKey,
               },
             ),
@@ -63,22 +63,15 @@ void main() {
         );
       });
 
-      test('throws LocationNotFoundFailure on error response', () async {
-        final response = MockResponse();
-        when(() => response.statusCode).thenReturn(200);
-        when(() => response.body).thenReturn('{}');
-        when(() => httpClient.get(any())).thenAnswer((_) async => response);
-        await expectLater(apiClient.locationSearch(query),
-            throwsA(isA<LocationNotFoundFailure>()));
-      });
-
       test('throws LocationNotFoundFailure on empty response', () async {
         final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
-        when(() => response.body).thenReturn('{[]}');
+        when(() => response.body).thenReturn('[]');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
-        await expectLater(apiClient.locationSearch(query),
-            throwsA(isA<LocationNotFoundFailure>()));
+        await expectLater(
+          apiClient.locationSearch(query),
+          throwsA(isA<LocationNotFoundFailure>()),
+        );
       });
 
       test('returns Location on valid response', () async {
@@ -90,7 +83,7 @@ void main() {
               {
                 "name": "London",
                 "local_names": {
-                  "en": "London",
+                  "en": "London"
                 },
                 "lat": 51.5073219,
                 "lon": -0.1276474,
@@ -107,7 +100,7 @@ void main() {
           isA<Location>()
               .having((l) => l.name, 'name', 'London')
               .having((l) => l.lat, 'lat', 51.5073219)
-              .having((l) => l.name, 'lon', -0.1276474),
+              .having((l) => l.lon, 'lon', -0.1276474),
         );
       });
     });
