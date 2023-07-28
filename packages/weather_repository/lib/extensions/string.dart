@@ -4,8 +4,9 @@ extension StringExtension on String {
       return '';
     }
     return split(' ')
-        .map((element) =>
-            "${element[0].toUpperCase()}${element.substring(1).toLowerCase()}")
+        .map(
+          (w) => '${w[0].toUpperCase()}${w.substring(1).toLowerCase()}',
+        )
         .join(' ');
   }
 }

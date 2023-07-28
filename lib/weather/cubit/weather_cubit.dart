@@ -22,10 +22,12 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
       final weather = Weather.fromRepository(
         await _weatherRepository.getWeather(city),
       );
-      emit(state.copyWith(
-        status: WeatherStatus.success,
-        weather: weather,
-      ));
+      emit(
+        state.copyWith(
+          status: WeatherStatus.success,
+          weather: weather,
+        ),
+      );
     } on Exception {
       emit(state.copyWith(status: WeatherStatus.failure));
     }

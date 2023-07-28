@@ -220,8 +220,11 @@ void main() {
         expect(
           actual,
           isA<Weather>()
-              .having((w) => w.conditions.first.description,
-                  'weather description', 'clear sky')
+              .having(
+                (w) => w.conditions.first.description,
+                'weather description',
+                'clear sky',
+              )
               .having((w) => w.conditions.first.icon, 'weather icon', '01d')
               .having((w) => w.main.temp, 'temp', 302.54)
               .having((w) => w.main.humidity, 'humidity', 55)
