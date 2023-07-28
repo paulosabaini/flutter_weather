@@ -5,15 +5,8 @@ class WeatherLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text('Loading Weather'),
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: CircularProgressIndicator(),
-        )
-      ],
+    return const CircularProgressIndicator(
+      color: Color.fromARGB(255, 6, 40, 61),
     );
   }
 }
