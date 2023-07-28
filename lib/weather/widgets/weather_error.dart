@@ -5,10 +5,23 @@ class WeatherError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Oops! Invalid location :/'),
+        const SizedBox(height: 16),
+        Image.asset(
+          'assets/images/404.png',
+          scale: 1.5,
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          'Oops! Invalid location :/',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 6, 40, 61),
+          ),
+        ),
       ],
     );
   }

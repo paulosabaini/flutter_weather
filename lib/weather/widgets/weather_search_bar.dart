@@ -36,7 +36,7 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
             size: 30,
           ),
           suffixIcon: CircleAvatar(
-            radius: 30,
+            radius: 25,
             backgroundColor: const Color.fromARGB(255, 199, 220, 234),
             child: IconButton(
               onPressed: () async {
