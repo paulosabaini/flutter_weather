@@ -24,16 +24,6 @@ class WeatherView extends StatefulWidget {
 }
 
 class _WeatherViewState extends State<WeatherView> {
-  final TextEditingController _textController = TextEditingController();
-
-  String get _text => _textController.text;
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,25 +47,7 @@ class _WeatherViewState extends State<WeatherView> {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
-                  controller: _textController,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.place),
-                    suffixIcon: IconButton.filled(
-                      onPressed: () async {
-                        await context.read<WeatherCubit>().fetchWeather(_text);
-                      },
-                      icon: const Icon(Icons.search),
-                      color: Colors.black,
-                      splashColor: const Color.fromARGB(255, 199, 220, 234),
-                    ),
-                    hintText: 'Enter your location',
-                    border: InputBorder.none,
-                  ),
-                  onSubmitted: (value) async {
-                    await context.read<WeatherCubit>().fetchWeather(_text);
-                  },
-                ),
+                const WeatherSearchBar(),
                 _WeatherContent(
                   state: state,
                   onRefresh: () async {
