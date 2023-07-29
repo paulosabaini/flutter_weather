@@ -22,6 +22,8 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    _textController.text = context.read<WeatherCubit>().state.weather.location;
+
     return Container(
       padding: const EdgeInsets.only(left: 16, right: 16),
       decoration: BoxDecoration(
