@@ -23,9 +23,29 @@ class WeatherAppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color.fromARGB(255, 6, 40, 61);
+
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 7, 40, 61),
+        primaryColor: primaryColor,
+        fontFamily: 'Roboto',
+        textTheme: const TextTheme(
+          bodySmall: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: primaryColor,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: primaryColor,
+          ),
+          displayMedium: TextStyle(
+            fontSize: 42,
+            fontWeight: FontWeight.bold,
+            color: primaryColor,
+          ),
+        ),
         appBarTheme: const AppBarTheme(
           color: Color.fromARGB(255, 7, 40, 61),
           foregroundColor: Colors.white,

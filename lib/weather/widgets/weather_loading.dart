@@ -5,8 +5,8 @@ class WeatherLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator(
-      color: Color.fromARGB(255, 6, 40, 61),
+    return CircularProgressIndicator(
+      color: Theme.of(context).primaryColor,
     );
   }
 }

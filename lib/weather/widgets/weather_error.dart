@@ -14,13 +14,9 @@ class WeatherError extends StatelessWidget {
           scale: 1.5,
         ),
         const SizedBox(height: 16),
-        const Text(
+        Text(
           'Oops! Invalid location :/',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 6, 40, 61),
-          ),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     );

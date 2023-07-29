@@ -40,34 +40,42 @@ class _WeatherViewState extends State<WeatherView> {
           )
         ],
       ),
-      body: Center(
-        child: BlocConsumer<WeatherCubit, WeatherState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const WeatherSearchBar(),
-                _WeatherContent(
-                  state: state,
-                  onRefresh: () async {
-                    await context.read<WeatherCubit>().refreshWeather();
+      body: Stack(
+        children: [
+          RefreshIndicator(
+            onRefresh: () async {
+              await context.read<WeatherCubit>().refreshWeather();
+            },
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              clipBehavior: Clip.none,
+              child: Center(
+                child: BlocConsumer<WeatherCubit, WeatherState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        const WeatherSearchBar(),
+                        _WeatherContent(
+                          state: state,
+                        ),
+                      ],
+                    );
                   },
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
 class _WeatherContent extends StatelessWidget {
-  const _WeatherContent({required this.state, required this.onRefresh});
+  const _WeatherContent({required this.state});
 
   final WeatherState state;
-  final ValueGetter<Future<void>> onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +90,6 @@ class _WeatherContent extends StatelessWidget {
         return WeatherPopulated(
           weather: state.weather,
           units: state.temperatureUnits,
-          onRefresh: onRefresh,
         );
     }
   }
