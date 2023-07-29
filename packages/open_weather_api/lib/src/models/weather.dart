@@ -22,15 +22,15 @@ class Weather {
 @JsonSerializable(explicitToJson: true)
 class WeatherCondition {
   const WeatherCondition({
+    required this.main,
     required this.description,
-    required this.icon,
   });
 
   factory WeatherCondition.fromJson(Map<String, dynamic> json) =>
       _$WeatherConditionFromJson(json);
 
+  final String main;
   final String description;
-  final String icon;
 }
 
 @JsonSerializable(explicitToJson: true)

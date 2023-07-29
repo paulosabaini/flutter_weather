@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_repository/weather_repository.dart' hide Weather;
 import 'package:weather_repository/weather_repository.dart'
     as weather_repository;
 
@@ -16,8 +17,8 @@ extension TemperatureUnitsX on TemperatureUnits {
 class Weather extends Equatable {
   const Weather({
     required this.location,
+    required this.condition,
     required this.conditionDescription,
-    required this.conditionIconURL,
     required this.temperature,
     required this.humidity,
     required this.windSpeed,
@@ -30,9 +31,8 @@ class Weather extends Equatable {
   factory Weather.fromRepository(weather_repository.Weather weather) {
     return Weather(
       location: weather.location,
+      condition: weather.condition,
       conditionDescription: weather.conditionDescription,
-      conditionIconURL:
-          'https://openweathermap.org/img/wn/${weather.conditionIcon}@2x.png',
       temperature: weather.temperature,
       humidity: weather.humidity,
       windSpeed: weather.windSpeed,
@@ -42,8 +42,8 @@ class Weather extends Equatable {
 
   static final empty = Weather(
     location: '',
+    condition: WeatherConditionEnum.unknown,
     conditionDescription: '',
-    conditionIconURL: '',
     temperature: 0,
     humidity: 0,
     windSpeed: 0,
@@ -51,8 +51,8 @@ class Weather extends Equatable {
   );
 
   final String location;
+  final WeatherConditionEnum condition;
   final String conditionDescription;
-  final String conditionIconURL;
   final double temperature;
   final int humidity;
   final double windSpeed;
@@ -61,8 +61,8 @@ class Weather extends Equatable {
   @override
   List<Object?> get props => [
         location,
+        condition,
         conditionDescription,
-        conditionIconURL,
         temperature,
         humidity,
         windSpeed,
@@ -73,8 +73,8 @@ class Weather extends Equatable {
 
   Weather copyWith({
     String? location,
+    WeatherConditionEnum? condition,
     String? conditionDescription,
-    String? conditionIconURL,
     double? temperature,
     int? humidity,
     double? windSpeed,
@@ -82,8 +82,8 @@ class Weather extends Equatable {
   }) {
     return Weather(
       location: location ?? this.location,
+      condition: condition ?? this.condition,
       conditionDescription: conditionDescription ?? this.conditionDescription,
-      conditionIconURL: conditionIconURL ?? this.conditionIconURL,
       temperature: temperature ?? this.temperature,
       humidity: humidity ?? this.humidity,
       windSpeed: windSpeed ?? this.windSpeed,

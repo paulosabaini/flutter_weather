@@ -99,8 +99,8 @@ void main() {
         );
         when(() => weather.conditions).thenReturn([
           const open_weather_api.WeatherCondition(
+            main: 'Clear',
             description: 'clear sky',
-            icon: '01',
           )
         ]);
         when(() => weather.wind).thenReturn(
@@ -120,8 +120,8 @@ void main() {
           actual,
           const Weather(
             location: city,
+            condition: WeatherConditionEnum.clear,
             conditionDescription: 'Clear Sky',
-            conditionIcon: '01',
             temperature: 30,
             humidity: 70,
             windSpeed: 20,

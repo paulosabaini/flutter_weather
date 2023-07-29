@@ -225,7 +225,11 @@ void main() {
                 'weather description',
                 'clear sky',
               )
-              .having((w) => w.conditions.first.icon, 'weather icon', '01d')
+              .having(
+                (w) => w.conditions.first.main,
+                'weather condition',
+                'Clear',
+              )
               .having((w) => w.main.temp, 'temp', 302.54)
               .having((w) => w.main.humidity, 'humidity', 55)
               .having((w) => w.wind.speed, 'wind speed', 0.82),

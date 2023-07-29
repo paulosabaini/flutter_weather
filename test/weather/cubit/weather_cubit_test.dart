@@ -5,6 +5,7 @@ import 'package:flutter_weather/weather/models/weather.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:weather_repository/weather_repository.dart'
     as weather_repository;
+import 'package:weather_repository/weather_repository.dart' hide Weather;
 import '../../helpers/hydrated_bloc.dart';
 
 const weatherLocation = 'London';
@@ -34,7 +35,7 @@ void main() {
       when(() => weather.temperature).thenReturn(weatherTemperature);
       when(() => weather.conditionDescription)
           .thenReturn(weatherConditionDescription);
-      when(() => weather.conditionIcon).thenReturn(weatherConditionIcon);
+      when(() => weather.condition).thenReturn(WeatherConditionEnum.clear);
       when(() => weather.humidity).thenReturn(weatherHumidity);
       when(() => weather.windSpeed).thenReturn(weatherWindSpeed);
       when(
@@ -122,9 +123,9 @@ void main() {
                       weatherConditionDescription,
                     )
                     .having(
-                      (w) => w.conditionIconURL,
-                      'conditionIconURL',
-                      'https://openweathermap.org/img/wn/01@2x.png',
+                      (w) => w.condition,
+                      'condition',
+                      WeatherConditionEnum.clear,
                     )
                     .having((w) => w.humidity, 'humidity', weatherHumidity)
                     .having((w) => w.windSpeed, 'windSpeed', weatherWindSpeed),
@@ -161,8 +162,8 @@ void main() {
             status: WeatherStatus.success,
             weather: Weather(
               location: weatherLocation,
+              condition: WeatherConditionEnum.clear,
               conditionDescription: weatherConditionDescription,
-              conditionIconURL: weatherConditionIcon,
               temperature: weatherTemperature,
               humidity: weatherHumidity,
               windSpeed: weatherWindSpeed,
@@ -188,8 +189,8 @@ void main() {
             status: WeatherStatus.success,
             weather: Weather(
               location: weatherLocation,
+              condition: WeatherConditionEnum.clear,
               conditionDescription: weatherConditionDescription,
-              conditionIconURL: weatherConditionIcon,
               temperature: weatherTemperature,
               humidity: weatherHumidity,
               windSpeed: weatherWindSpeed,
@@ -207,8 +208,8 @@ void main() {
             status: WeatherStatus.success,
             weather: Weather(
               location: weatherLocation,
+              condition: WeatherConditionEnum.clear,
               conditionDescription: weatherConditionDescription,
-              conditionIconURL: weatherConditionIcon,
               temperature: 0,
               humidity: weatherHumidity,
               windSpeed: weatherWindSpeed,

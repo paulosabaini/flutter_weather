@@ -15,13 +15,13 @@ class WeatherPopulated extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 16,
+        const SizedBox(height: 16),
+        Image.asset(
+          weather.condition.toAssetName,
+          width: 200,
+          height: 200,
         ),
-        Image.network(
-          weather.conditionIconURL,
-          scale: 0.5,
-        ),
+        const SizedBox(height: 32),
         Text(
           weather.formattedTemperature(units),
           style: Theme.of(context).textTheme.displayMedium,
@@ -117,5 +117,24 @@ extension on Weather {
   String formattedWindSpeed(TemperatureUnits units) {
     final speed = units.isCelsius ? windSpeed * 3.6 : windSpeed;
     return '''${speed.toStringAsPrecision(2)}${units.isCelsius ? 'KM/h' : 'mph'}''';
+  }
+}
+
+extension on WeatherConditionEnum {
+  String get toAssetName {
+    switch (this) {
+      case WeatherConditionEnum.clear:
+        return 'assets/images/clear.png';
+      case WeatherConditionEnum.clouds:
+        return 'assets/images/cloud.png';
+      case WeatherConditionEnum.haze:
+        return 'assets/images/mist.png';
+      case WeatherConditionEnum.rain:
+        return 'assets/images/rain.png';
+      case WeatherConditionEnum.snow:
+        return 'assets/images/clear.png';
+      case WeatherConditionEnum.unknown:
+        return 'assets/images/clear.png';
+    }
   }
 }

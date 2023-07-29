@@ -1,3 +1,5 @@
+export 'package:weather_repository/weather_repository.dart'
+    show WeatherConditionEnum;
 export 'cubit/weather_cubit.dart';
 export 'models/models.dart';
 export 'view/weather_page.dart';

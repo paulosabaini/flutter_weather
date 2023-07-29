@@ -17,12 +17,31 @@ class WeatherRepository {
     );
     return Weather(
       location: location.name,
+      condition: weather.conditions.first.main.toCondition,
       conditionDescription:
           weather.conditions.first.description.capitalizeByWord(),
-      conditionIcon: weather.conditions.first.icon,
       temperature: weather.main.temp,
       humidity: weather.main.humidity,
       windSpeed: weather.wind.speed,
     );
+  }
+}
+
+extension on String {
+  WeatherConditionEnum get toCondition {
+    switch (this) {
+      case 'Clear':
+        return WeatherConditionEnum.clear;
+      case 'Rain':
+        return WeatherConditionEnum.rain;
+      case 'Snow':
+        return WeatherConditionEnum.snow;
+      case 'Clouds':
+        return WeatherConditionEnum.clouds;
+      case 'Haze':
+        return WeatherConditionEnum.haze;
+      default:
+        return WeatherConditionEnum.unknown;
+    }
   }
 }

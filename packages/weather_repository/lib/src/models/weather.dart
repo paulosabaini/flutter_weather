@@ -3,12 +3,27 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'weather.g.dart';
 
+enum WeatherConditionEnum {
+  @JsonValue('clear')
+  clear,
+  @JsonValue('clouds')
+  clouds,
+  @JsonValue('haze')
+  haze,
+  @JsonValue('rain')
+  rain,
+  @JsonValue('snow')
+  snow,
+  @JsonValue('unknown')
+  unknown
+}
+
 @JsonSerializable()
 class Weather extends Equatable {
   const Weather({
     required this.location,
+    required this.condition,
     required this.conditionDescription,
-    required this.conditionIcon,
     required this.temperature,
     required this.humidity,
     required this.windSpeed,
@@ -20,8 +35,8 @@ class Weather extends Equatable {
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 
   final String location;
+  final WeatherConditionEnum condition;
   final String conditionDescription;
-  final String conditionIcon;
   final double temperature;
   final int humidity;
   final double windSpeed;
@@ -29,8 +44,8 @@ class Weather extends Equatable {
   @override
   List<Object?> get props => [
         location,
+        condition,
         conditionDescription,
-        conditionIcon,
         temperature,
         humidity,
         windSpeed
