@@ -41,7 +41,7 @@ class Weather extends Equatable {
   }
 
   static final empty = Weather(
-    location: '--',
+    location: '',
     conditionDescription: '',
     conditionIconURL: '',
     temperature: 0,

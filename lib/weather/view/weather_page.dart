@@ -81,7 +81,7 @@ class _WeatherContent extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (state.status) {
       case WeatherStatus.initial:
-        return const Spacer();
+        return const SizedBox();
       case WeatherStatus.loading:
         return const WeatherLoading();
       case WeatherStatus.failure:
