@@ -33,7 +33,7 @@ void main() {
 
       test('calls locationSearch with correct city', () async {
         try {
-          await weatherRepository.getWeather(city);
+          await weatherRepository.getWeather(city: city, isCelsius: true);
         } catch (_) {}
         verify(() => weatherApiClient.locationSearch(city)).called(1);
       });
@@ -42,7 +42,7 @@ void main() {
         final exception = Exception('oops');
         when(() => weatherApiClient.locationSearch(any())).thenThrow(exception);
         expect(
-          () async => weatherRepository.getWeather(city),
+          () async => weatherRepository.getWeather(city: city, isCelsius: true),
           throwsA(exception),
         );
       });
@@ -55,12 +55,13 @@ void main() {
           (_) async => location,
         );
         try {
-          await weatherRepository.getWeather(city);
+          await weatherRepository.getWeather(city: city, isCelsius: true);
         } catch (_) {}
         verify(
           () => weatherApiClient.getWeather(
             latitude: latitude,
             longitude: longitude,
+            isCelsius: true,
           ),
         ).called(1);
       });
@@ -77,10 +78,11 @@ void main() {
           () => weatherApiClient.getWeather(
             latitude: latitude,
             longitude: longitude,
+            isCelsius: true,
           ),
         ).thenThrow(exception);
         expect(
-          () async => weatherRepository.getWeather(city),
+          () async => weatherRepository.getWeather(city: city, isCelsius: true),
           throwsA(exception),
         );
       });
@@ -113,9 +115,13 @@ void main() {
           () => weatherApiClient.getWeather(
             latitude: any(named: 'latitude'),
             longitude: any(named: 'longitude'),
+            isCelsius: true,
           ),
         ).thenAnswer((_) async => weather);
-        final actual = await weatherRepository.getWeather(city);
+        final actual = await weatherRepository.getWeather(
+          city: city,
+          isCelsius: true,
+        );
         expect(
           actual,
           const Weather(

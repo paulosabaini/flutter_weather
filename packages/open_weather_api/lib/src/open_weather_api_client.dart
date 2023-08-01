@@ -55,6 +55,7 @@ class OpenWeatherApiClient {
   Future<Weather> getWeather({
     required double latitude,
     required double longitude,
+    required bool isCelsius,
   }) async {
     final weatherRequest = Uri.https(
       _baseUrl,
@@ -63,7 +64,7 @@ class OpenWeatherApiClient {
         'lat': '$latitude',
         'lon': '$longitude',
         'appid': openWeatherApiKey,
-        'units': 'metric',
+        'units': isCelsius ? 'metric' : 'imperial',
       },
     );
 

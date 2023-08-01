@@ -115,7 +115,11 @@ void main() {
         when(() => response.body).thenReturn('{}');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         try {
-          await apiClient.getWeather(latitude: latitude, longitude: longitude);
+          await apiClient.getWeather(
+            latitude: latitude,
+            longitude: longitude,
+            isCelsius: true,
+          );
         } catch (_) {}
         verify(
           () => httpClient.get(
@@ -140,6 +144,7 @@ void main() {
           () async => apiClient.getWeather(
             latitude: latitude,
             longitude: longitude,
+            isCelsius: true,
           ),
           throwsA(isA<WeatherRequestFailure>()),
         );
@@ -154,6 +159,7 @@ void main() {
           () async => apiClient.getWeather(
             latitude: latitude,
             longitude: longitude,
+            isCelsius: true,
           ),
           throwsA(isA<WeatherNotFoundFailure>()),
         );
@@ -216,6 +222,7 @@ void main() {
         final actual = await apiClient.getWeather(
           latitude: latitude,
           longitude: longitude,
+          isCelsius: true,
         );
         expect(
           actual,

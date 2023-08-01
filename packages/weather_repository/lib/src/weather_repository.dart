@@ -9,11 +9,15 @@ class WeatherRepository {
 
   final OpenWeatherApiClient _weatherApiClient;
 
-  Future<Weather> getWeather(String city) async {
+  Future<Weather> getWeather({
+    required String city,
+    required bool isCelsius,
+  }) async {
     final location = await _weatherApiClient.locationSearch(city);
     final weather = await _weatherApiClient.getWeather(
       latitude: location.lat,
       longitude: location.lon,
+      isCelsius: isCelsius,
     );
     return Weather(
       location: location.name,

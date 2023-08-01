@@ -39,7 +39,7 @@ void main() {
       when(() => weather.humidity).thenReturn(weatherHumidity);
       when(() => weather.windSpeed).thenReturn(weatherWindSpeed);
       when(
-        () => weatherRepository.getWeather(any()),
+        () => weatherRepository.getWeather(city: any(), isCelsius: true),
       ).thenAnswer((_) async => weather);
       weatherCubit = WeatherCubit(weatherRepository);
     });
@@ -79,7 +79,10 @@ void main() {
         build: () => weatherCubit,
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         verify: (_) {
-          verify(() => weatherRepository.getWeather(weatherLocation)).called(1);
+          verify(() => weatherRepository.getWeather(
+                city: weatherLocation,
+                isCelsius: true,
+              )).called(1);
         },
       );
 
@@ -87,7 +90,7 @@ void main() {
         'emits [loading, failure] when getWeather throws',
         setUp: () {
           when(
-            () => weatherRepository.getWeather(any()),
+            () => weatherRepository.getWeather(city: any(), isCelsius: true),
           ).thenThrow(Exception('oops'));
         },
         build: () => weatherCubit,
@@ -140,7 +143,10 @@ void main() {
           act: (cubit) => cubit.refreshWeather(),
           expect: () => <WeatherState>[],
           verify: (_) {
-            verifyNever(() => weatherRepository.getWeather(any()));
+            verifyNever(() => weatherRepository.getWeather(
+                  city: any(),
+                  isCelsius: true,
+                ));
           },
         );
 
@@ -151,7 +157,10 @@ void main() {
           act: (cubit) => cubit.refreshWeather(),
           expect: () => <WeatherState>[],
           verify: (_) {
-            verifyNever(() => weatherRepository.getWeather(any()));
+            verifyNever(() => weatherRepository.getWeather(
+                  city: any(),
+                  isCelsius: true,
+                ));
           },
         );
 
@@ -172,8 +181,10 @@ void main() {
           ),
           act: (cubit) => cubit.refreshWeather(),
           verify: (_) {
-            verify(() => weatherRepository.getWeather(weatherLocation))
-                .called(1);
+            verify(() => weatherRepository.getWeather(
+                  city: weatherLocation,
+                  isCelsius: true,
+                )).called(1);
           },
         );
 
@@ -181,7 +192,10 @@ void main() {
           'emits nothing when exception is thrown',
           setUp: () {
             when(
-              () => weatherRepository.getWeather(any()),
+              () => weatherRepository.getWeather(
+                city: any(),
+                isCelsius: true,
+              ),
             ).thenThrow(Exception('oops'));
           },
           build: () => weatherCubit,

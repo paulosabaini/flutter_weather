@@ -35,7 +35,9 @@ class SettingsPage extends StatelessWidget {
                 ),
                 trailing: Switch(
                   value: state.temperatureUnits.isCelsius,
-                  onChanged: (_) => context.read<WeatherCubit>(),
+                  onChanged: (_) async =>
+                      context.read<WeatherCubit>().toggleUnits(),
+                  activeTrackColor: Theme.of(context).primaryColor,
                 ),
               );
             },

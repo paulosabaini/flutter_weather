@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_weather/weather/models/weather.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -20,7 +22,10 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
 
     try {
       final weather = Weather.fromRepository(
-        await _weatherRepository.getWeather(city),
+        await _weatherRepository.getWeather(
+          city: city,
+          isCelsius: state.temperatureUnits.isCelsius,
+        ),
       );
       emit(
         state.copyWith(
@@ -39,7 +44,10 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
 
     try {
       final weather = Weather.fromRepository(
-        await _weatherRepository.getWeather(state.weather.location),
+        await _weatherRepository.getWeather(
+          city: state.weather.location,
+          isCelsius: state.temperatureUnits.isCelsius,
+        ),
       );
       emit(
         state.copyWith(
@@ -50,6 +58,15 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
     } on Exception {
       emit(state);
     }
+  }
+
+  Future<void> toggleUnits() async {
+    final units = state.temperatureUnits.isFahrenheit
+        ? TemperatureUnits.celsius
+        : TemperatureUnits.fahrenheit;
+
+    emit(state.copyWith(temperatureUnits: units));
+    unawaited(refreshWeather());
   }
 
   @override
