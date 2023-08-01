@@ -48,7 +48,7 @@ class WeatherAppView extends StatelessWidget {
           ),
         ),
         appBarTheme: const AppBarTheme(
-          color: Color.fromARGB(255, 7, 40, 61),
+          color: primaryColor,
           foregroundColor: Colors.white,
         ),
         useMaterial3: true,
