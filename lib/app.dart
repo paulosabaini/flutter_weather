@@ -28,6 +28,7 @@ class WeatherAppView extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: primaryColor,
+        iconTheme: const IconThemeData(color: primaryColor),
         fontFamily: 'Roboto',
         textTheme: const TextTheme(
           bodySmall: TextStyle(

@@ -37,7 +37,6 @@ WeatherCondition _$WeatherConditionFromJson(Map<String, dynamic> json) =>
         final val = WeatherCondition(
           main: $checkedConvert('main', (v) => v as String),
           description: $checkedConvert('description', (v) => v as String),
-          icon: $checkedConvert('icon', (v) => v as String),
         );
         return val;
       },

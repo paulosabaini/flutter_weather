@@ -42,7 +42,7 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
           ),
           suffixIcon: CircleAvatar(
             radius: 25,
-            backgroundColor: const Color.fromARGB(255, 199, 220, 234),
+            backgroundColor: const Color.fromARGB(255, 224, 246, 252),
             child: IconButton(
               onPressed: () async {
                 await context.read<WeatherCubit>().fetchWeather(_text);

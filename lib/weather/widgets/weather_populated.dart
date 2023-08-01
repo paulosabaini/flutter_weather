@@ -31,7 +31,7 @@ class WeatherPopulated extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         const SizedBox(
-          height: 16,
+          height: 32,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -58,10 +58,11 @@ class _WeatherHumidity extends StatelessWidget {
       children: [
         const Icon(Icons.water),
         const SizedBox(
-          width: 16,
+          width: 8,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               '$humidity%',
@@ -89,7 +90,7 @@ class _WeatherWindSpeed extends StatelessWidget {
       children: [
         const Icon(Icons.north_east),
         const SizedBox(
-          width: 16,
+          width: 8,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +117,7 @@ extension on Weather {
 
   String formattedWindSpeed(TemperatureUnits units) {
     final speed = units.isCelsius ? windSpeed * 3.6 : windSpeed;
-    return '''${speed.toStringAsPrecision(2)}${units.isCelsius ? 'KM/h' : 'mph'}''';
+    return '''${speed.toStringAsPrecision(2)}${units.isCelsius ? 'Km/h' : 'mph'}''';
   }
 }
 
