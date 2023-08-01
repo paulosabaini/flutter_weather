@@ -30,16 +30,36 @@ class WeatherRepository {
 extension on String {
   WeatherConditionEnum get toCondition {
     switch (this) {
-      case 'Clear':
-        return WeatherConditionEnum.clear;
+      case 'Thunderstorm':
+        return WeatherConditionEnum.thunderstorm;
+      case 'Drizzle':
+        return WeatherConditionEnum.drizzle;
       case 'Rain':
         return WeatherConditionEnum.rain;
       case 'Snow':
         return WeatherConditionEnum.snow;
-      case 'Clouds':
-        return WeatherConditionEnum.clouds;
+      case 'Mist':
+        return WeatherConditionEnum.mist;
+      case 'Smoke':
+        return WeatherConditionEnum.smoke;
       case 'Haze':
         return WeatherConditionEnum.haze;
+      case 'Dust':
+        return WeatherConditionEnum.dust;
+      case 'Fog':
+        return WeatherConditionEnum.fog;
+      case 'Sand':
+        return WeatherConditionEnum.sand;
+      case 'Ash':
+        return WeatherConditionEnum.ash;
+      case 'Squall':
+        return WeatherConditionEnum.squall;
+      case 'Tornado':
+        return WeatherConditionEnum.tornado;
+      case 'Clear':
+        return WeatherConditionEnum.clear;
+      case 'Clouds':
+        return WeatherConditionEnum.clouds;
       default:
         return WeatherConditionEnum.unknown;
     }

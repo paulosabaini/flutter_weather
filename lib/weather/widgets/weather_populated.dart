@@ -124,18 +124,38 @@ extension on Weather {
 extension on WeatherConditionEnum {
   String get toAssetName {
     switch (this) {
-      case WeatherConditionEnum.clear:
-        return 'assets/images/clear.png';
-      case WeatherConditionEnum.clouds:
-        return 'assets/images/cloud.png';
-      case WeatherConditionEnum.haze:
-        return 'assets/images/mist.png';
+      case WeatherConditionEnum.thunderstorm:
+        return 'assets/images/thunderstorm.png';
+      case WeatherConditionEnum.drizzle:
+        return 'assets/images/raindrop.png';
       case WeatherConditionEnum.rain:
         return 'assets/images/rain.png';
       case WeatherConditionEnum.snow:
+        return 'assets/images/snow.png';
+      case WeatherConditionEnum.mist:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.smoke:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.haze:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.dust:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.fog:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.sand:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.ash:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.squall:
+        return 'assets/images/wind.png';
+      case WeatherConditionEnum.tornado:
+        return 'assets/images/tornado.png';
+      case WeatherConditionEnum.clear:
         return 'assets/images/clear.png';
+      case WeatherConditionEnum.clouds:
+        return 'assets/images/cloudy.png';
       case WeatherConditionEnum.unknown:
-        return 'assets/images/clear.png';
+        return 'assets/images/rainbow.png';
     }
   }
 }

@@ -4,17 +4,21 @@ import 'package:json_annotation/json_annotation.dart';
 part 'weather.g.dart';
 
 enum WeatherConditionEnum {
-  @JsonValue('clear')
-  clear,
-  @JsonValue('clouds')
-  clouds,
-  @JsonValue('haze')
-  haze,
-  @JsonValue('rain')
+  thunderstorm,
+  drizzle,
   rain,
-  @JsonValue('snow')
   snow,
-  @JsonValue('unknown')
+  mist,
+  smoke,
+  haze,
+  dust,
+  fog,
+  sand,
+  ash,
+  squall,
+  tornado,
+  clear,
+  clouds,
   unknown
 }
 
