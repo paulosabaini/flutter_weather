@@ -22,45 +22,48 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final location = context.read<WeatherCubit>().state.weather.location;
-    if (location.isNotEmpty) {
-      _textController.text = location;
-    }
-
-    return Container(
-      padding: const EdgeInsets.only(left: 16, right: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
-      ),
-      child: TextField(
-        controller: _textController,
-        decoration: InputDecoration(
-          prefixIcon: const Icon(
-            Icons.place,
-            size: 30,
-          ),
-          suffixIcon: CircleAvatar(
-            radius: 25,
-            backgroundColor: const Color.fromARGB(255, 224, 246, 252),
-            child: IconButton(
-              onPressed: () async {
-                await context.read<WeatherCubit>().fetchWeather(_text);
-              },
-              icon: const Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-              iconSize: 30,
-            ),
-          ),
-          hintText: 'Enter your location',
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.all(36),
+    return BlocListener<WeatherCubit, WeatherState>(
+      listener: (context, state) {
+        final location = state.weather.location;
+        if (state.status == WeatherStatus.success) {
+          _textController.text = location;
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.only(left: 16, right: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.white,
         ),
-        onSubmitted: (value) async {
-          await context.read<WeatherCubit>().fetchWeather(_text);
-        },
+        child: TextField(
+          controller: _textController,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(
+              Icons.place,
+              size: 30,
+            ),
+            suffixIcon: CircleAvatar(
+              radius: 25,
+              backgroundColor: const Color.fromARGB(255, 224, 246, 252),
+              child: IconButton(
+                onPressed: () async {
+                  await context.read<WeatherCubit>().fetchWeather(_text);
+                },
+                icon: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                iconSize: 30,
+              ),
+            ),
+            hintText: 'Enter your location',
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.all(36),
+          ),
+          onSubmitted: (value) async {
+            await context.read<WeatherCubit>().fetchWeather(_text);
+          },
+        ),
       ),
     );
   }
