@@ -10,7 +10,7 @@ import '../../helpers/hydrated_bloc.dart';
 
 const weatherLocation = 'London';
 const weatherConditionDescription = 'Clear Sky';
-const weatherConditionIcon = '01';
+const weatherCondition = WeatherConditionEnum.clear;
 const weatherTemperature = 30.0;
 const weatherHumidity = 70;
 const weatherWindSpeed = 20.0;
@@ -35,11 +35,14 @@ void main() {
       when(() => weather.temperature).thenReturn(weatherTemperature);
       when(() => weather.conditionDescription)
           .thenReturn(weatherConditionDescription);
-      when(() => weather.condition).thenReturn(WeatherConditionEnum.clear);
+      when(() => weather.condition).thenReturn(weatherCondition);
       when(() => weather.humidity).thenReturn(weatherHumidity);
       when(() => weather.windSpeed).thenReturn(weatherWindSpeed);
       when(
-        () => weatherRepository.getWeather(city: any(), isCelsius: true),
+        () => weatherRepository.getWeather(
+          city: any(named: 'city'),
+          isCelsius: any(named: 'isCelsius'),
+        ),
       ).thenAnswer((_) async => weather);
       weatherCubit = WeatherCubit(weatherRepository);
     });
@@ -79,10 +82,12 @@ void main() {
         build: () => weatherCubit,
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         verify: (_) {
-          verify(() => weatherRepository.getWeather(
-                city: weatherLocation,
-                isCelsius: true,
-              )).called(1);
+          verify(
+            () => weatherRepository.getWeather(
+              city: weatherLocation,
+              isCelsius: true,
+            ),
+          ).called(1);
         },
       );
 
@@ -90,7 +95,10 @@ void main() {
         'emits [loading, failure] when getWeather throws',
         setUp: () {
           when(
-            () => weatherRepository.getWeather(city: any(), isCelsius: true),
+            () => weatherRepository.getWeather(
+              city: any(named: 'city'),
+              isCelsius: any(named: 'isCelsius'),
+            ),
           ).thenThrow(Exception('oops'));
         },
         build: () => weatherCubit,
@@ -128,7 +136,7 @@ void main() {
                     .having(
                       (w) => w.condition,
                       'condition',
-                      WeatherConditionEnum.clear,
+                      weatherCondition,
                     )
                     .having((w) => w.humidity, 'humidity', weatherHumidity)
                     .having((w) => w.windSpeed, 'windSpeed', weatherWindSpeed),
@@ -143,10 +151,12 @@ void main() {
           act: (cubit) => cubit.refreshWeather(),
           expect: () => <WeatherState>[],
           verify: (_) {
-            verifyNever(() => weatherRepository.getWeather(
-                  city: any(),
-                  isCelsius: true,
-                ));
+            verifyNever(
+              () => weatherRepository.getWeather(
+                city: any(named: 'city'),
+                isCelsius: any(named: 'isCelsius'),
+              ),
+            );
           },
         );
 
@@ -157,10 +167,12 @@ void main() {
           act: (cubit) => cubit.refreshWeather(),
           expect: () => <WeatherState>[],
           verify: (_) {
-            verifyNever(() => weatherRepository.getWeather(
-                  city: any(),
-                  isCelsius: true,
-                ));
+            verifyNever(
+              () => weatherRepository.getWeather(
+                city: any(named: 'city'),
+                isCelsius: any(named: 'isCelsius'),
+              ),
+            );
           },
         );
 
@@ -171,7 +183,7 @@ void main() {
             status: WeatherStatus.success,
             weather: Weather(
               location: weatherLocation,
-              condition: WeatherConditionEnum.clear,
+              condition: weatherCondition,
               conditionDescription: weatherConditionDescription,
               temperature: weatherTemperature,
               humidity: weatherHumidity,
@@ -181,10 +193,12 @@ void main() {
           ),
           act: (cubit) => cubit.refreshWeather(),
           verify: (_) {
-            verify(() => weatherRepository.getWeather(
-                  city: weatherLocation,
-                  isCelsius: true,
-                )).called(1);
+            verify(
+              () => weatherRepository.getWeather(
+                city: weatherLocation,
+                isCelsius: any(named: 'isCelsius'),
+              ),
+            ).called(1);
           },
         );
 
@@ -193,8 +207,8 @@ void main() {
           setUp: () {
             when(
               () => weatherRepository.getWeather(
-                city: any(),
-                isCelsius: true,
+                city: any(named: 'city'),
+                isCelsius: any(named: 'isCelsius'),
               ),
             ).thenThrow(Exception('oops'));
           },
@@ -203,7 +217,7 @@ void main() {
             status: WeatherStatus.success,
             weather: Weather(
               location: weatherLocation,
-              condition: WeatherConditionEnum.clear,
+              condition: weatherCondition,
               conditionDescription: weatherConditionDescription,
               temperature: weatherTemperature,
               humidity: weatherHumidity,
@@ -222,7 +236,7 @@ void main() {
             status: WeatherStatus.success,
             weather: Weather(
               location: weatherLocation,
-              condition: WeatherConditionEnum.clear,
+              condition: weatherCondition,
               conditionDescription: weatherConditionDescription,
               temperature: 0,
               humidity: weatherHumidity,

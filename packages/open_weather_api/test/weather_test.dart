@@ -11,7 +11,7 @@ void main() {
               'weather': [
                 <String, dynamic>{
                   'description': 'clear sky',
-                  'icon': '01d',
+                  'main': 'Clear',
                 }
               ],
               'main': <String, dynamic>{

@@ -130,6 +130,7 @@ void main() {
                 'lat': '$latitude',
                 'lon': '$longitude',
                 'appid': openWeatherApiKey,
+                'units': 'metric',
               },
             ),
           ),
