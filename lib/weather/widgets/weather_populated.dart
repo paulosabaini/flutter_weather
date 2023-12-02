@@ -39,9 +39,9 @@ class WeatherPopulated extends StatelessWidget {
             _WeatherHumidity(humidity: weather.humidity),
             _WeatherWindSpeed(
               windSpeed: weather.formattedWindSpeed(units),
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -73,7 +73,7 @@ class _WeatherHumidity extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -104,7 +104,7 @@ class _WeatherWindSpeed extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
-        )
+        ),
       ],
     );
   }

@@ -103,7 +103,7 @@ void main() {
           const open_weather_api.WeatherCondition(
             main: 'Clear',
             description: 'clear sky',
-          )
+          ),
         ]);
         when(() => weather.wind).thenReturn(
           const open_weather_api.WeatherWind(speed: 20),

@@ -52,6 +52,6 @@ class Weather extends Equatable {
         conditionDescription,
         temperature,
         humidity,
-        windSpeed
+        windSpeed,
       ];
 }

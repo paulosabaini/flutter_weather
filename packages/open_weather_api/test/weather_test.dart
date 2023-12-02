@@ -18,7 +18,7 @@ void main() {
                 'temp': 302.54,
                 'humidity': 55,
               },
-              'wind': <String, dynamic>{'speed': 0.82}
+              'wind': <String, dynamic>{'speed': 0.82},
             },
           ),
           isA<Weather>()

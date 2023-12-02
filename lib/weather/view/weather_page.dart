@@ -37,7 +37,7 @@ class _WeatherViewState extends State<WeatherView> {
               );
             },
             icon: const Icon(Icons.settings),
-          )
+          ),
         ],
       ),
       body: Stack(
