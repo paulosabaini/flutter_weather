@@ -140,7 +140,7 @@ void main() {
                     )
                     .having((w) => w.humidity, 'humidity', weatherHumidity)
                     .having((w) => w.windSpeed, 'windSpeed', weatherWindSpeed),
-              )
+              ),
         ],
       );
 
